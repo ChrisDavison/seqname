@@ -3,6 +3,8 @@ name = "seqname"
 version = "0.1.0"
 authors = ["Chris Davison <c.jr.davison@gmail.com>"]
 edition = "2018"
+description = "Name files in dir(s) sequentially"
+repository = "https://github.com/chrisdavison/seqname"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 

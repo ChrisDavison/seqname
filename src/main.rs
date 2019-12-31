@@ -28,10 +28,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     let opt = Opt::from_args();
     let renamer = Renamer::new(opt.prefix, opt.suffix, opt.verbose);
     for dir in opt.dirs {
-        match renamer.rename(&dir) {
-            Ok(_) => continue,
-            Err(e) => eprintln!("Failed in dir {:?}: {}", dir.display(), e),
-        };
+        if let Err(e) = renamer.rename(&dir) {
+            eprintln!("Failed in dir {:?}: {}", dir.display(), e);
+        }
     }
     Ok(())
 }

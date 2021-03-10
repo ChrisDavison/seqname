@@ -1,4 +1,4 @@
-use std::path::PathBuf;
+use std::path::Path;
 
 pub struct Renamer {
     prefix: String,
@@ -23,7 +23,7 @@ impl Renamer {
         }
     }
 
-    pub fn rename(&self, dir: &PathBuf) -> Result<(), Box<dyn std::error::Error>> {
+    pub fn rename(&self, dir: &Path) -> Result<(), Box<dyn std::error::Error>> {
         let valid_paths = dir
             .read_dir()?
             .filter_map(|x| x.ok())

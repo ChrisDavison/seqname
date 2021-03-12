@@ -1,5 +1,7 @@
 # Seqname
 
+[![Rust](https://github.com/ChrisDavison/seqname/actions/workflows/rust.yml/badge.svg)](https://github.com/ChrisDavison/seqname/actions/workflows/rust.yml)
+
 Rename all *files* in a directory in sequence (e.g. if you have a bunch of screenshots, and you want them renamed `000.jpg...999.jpg`).
 
 ## Usage

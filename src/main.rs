@@ -16,9 +16,17 @@ struct Opt {
     #[structopt(short, long)]
     suffix: Option<String>,
 
+    ///Keep current name while prefixing or suffixing
+    #[structopt(short, long)]
+    keep_filename: bool,
+
     /// Show files moved/renamed
     #[structopt(short, long)]
     verbose: bool,
+
+    /// Show files moved/renamed
+    #[structopt(short, long)]
+    dry_run: bool,
 
     /// Directories with files to rename
     dirs: Vec<PathBuf>,
@@ -26,7 +34,13 @@ struct Opt {
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let opt = Opt::from_args();
-    let renamer = Renamer::new(opt.prefix, opt.suffix, opt.verbose);
+    let renamer = Renamer::new(
+        opt.prefix,
+        opt.suffix,
+        opt.verbose,
+        opt.keep_filename,
+        opt.dry_run,
+    );
     for dir in opt.dirs {
         if let Err(e) = renamer.rename(&dir) {
             eprintln!("Failed in dir {:?}: {}", dir.display(), e);

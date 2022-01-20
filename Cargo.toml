@@ -1,6 +1,6 @@
 [package]
 name = "seqname"
-version = "0.2.1"
+version = "0.3.0"
 authors = ["Chris Davison <c.jr.davison@gmail.com>"]
 edition = "2018"
 description = "Name files in dir(s) sequentially"

@@ -6,6 +6,7 @@ pub struct Renamer {
     verbose: bool,
     keep_filename: bool,
     dry_run: bool,
+    separator: String,
 }
 
 impl Renamer {
@@ -15,29 +16,25 @@ impl Renamer {
         verbose: bool,
         keep_filename: bool,
         dry_run: bool,
+        separator: Option<String>,
     ) -> Renamer {
-        let prefix = match prefix {
-            Some(p) => p,
-            None => "".into(),
-        };
-        let suffix = match suffix {
-            Some(s) => s,
-            None => "".into(),
-        };
+        let prefix = prefix.unwrap_or(String::new());
+        let suffix = suffix.unwrap_or(String::new());
+        let separator = separator.unwrap_or(String::from("--"));
         Renamer {
             prefix,
             suffix,
             verbose,
             keep_filename,
             dry_run,
+            separator,
         }
     }
 
     fn stem(&self, path: &Path) -> String {
         match (self.keep_filename, path.file_stem()) {
-            (false, _) => "".into(),
-            (_, Some(s)) => s.to_string_lossy().to_string(),
-            (_, None) => String::new(),
+            (true, Some(s)) => s.to_string_lossy().to_string(),
+            _ => String::new(),
         }
     }
 
@@ -57,7 +54,7 @@ impl Renamer {
         .filter(|s| !s.is_empty())
         .cloned()
         .collect::<Vec<String>>()
-        .join("--");
+        .join(&self.separator);
         parts + &ext
     }
 

@@ -28,6 +28,10 @@ struct Opt {
     #[structopt(short, long)]
     dry_run: bool,
 
+    /// Separator for file components
+    #[structopt(long)]
+    separator: Option<String>,
+
     /// Directories with files to rename
     dirs: Vec<PathBuf>,
 }
@@ -40,6 +44,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
         opt.verbose,
         opt.keep_filename,
         opt.dry_run,
+        opt.separator,
     );
     for dir in opt.dirs {
         if let Err(e) = renamer.rename(&dir) {
